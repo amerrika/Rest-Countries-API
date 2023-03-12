@@ -14,8 +14,6 @@ Your users should be able to:
 - Click on a country to see more detailed information on a separate page
 - Click through to the border countries on the detail page
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
-
 ## Built with
 
 - HTML5
