@@ -20,8 +20,4 @@ Want some support on the challenge? [Join our Slack community](https://www.front
 
 - HTML5
 - CSS (Flexbox, custom variables)
-- Vanilla JS
-
-## What I learned
-
-API, async function
+- Vanilla JS (Fetch API, async/await, DOM)
