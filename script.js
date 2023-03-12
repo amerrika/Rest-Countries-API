@@ -39,7 +39,6 @@ const getData = async function(url){
         const res = await fetch(url);
         const data = await res.json(); // data represents an array of country-objects that are fetched
 
-        console.log(data)
         renderCountry(data);
         return data; 
 
@@ -96,38 +95,36 @@ regions.forEach(region => {
 countriesContainer.addEventListener("click", function(e){
     if(e.target.classList.contains("country-img")){
         const code = e.target.parentElement.getAttribute('data-code');
-        console.log(code);
         
         // Fetch Country Object
         (async () => {
-            const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+            const res = await fetch(`https://restcountries.com/v2/alpha/${code}`)
             const data = await res.json();
-
+            console.log(data)
             // Display Country Details Page
             countriesContainer.classList.add("display-none");
             sectionSearch.classList.add("display-none");
             countryDetailsPage.classList.remove("display-none");
 
             // Create HTML
-            console.log(data[0].flags.png)
             const html = `
                 <div class="country-details__img">
-                    <img id="country-details-img" src="${data[0].flags.png}" alt="">
+                    <img id="country-details-img" src="${data.flag}" alt="">
                 </div>
                 <div class="country-details__content">
-                    <h2 class="country-title">${data[0].name.common}</h2>
+                    <h2 class="country-title">${data.name}</h2>
                     <div class="country-details__data">
                         <div>
-                            <p><span>Native Name:</span> ${data[0].name.nativeName.sqi.official}</p>
-                            <p><span>Population:</span> 11,319,511</p>
-                            <p><span>Region:</span> Europe</p>
-                            <p><span>Subregion:</span> Western Europe</p>
-                            <p><span>Capital:</span> Brussels</p>
+                            <p><span>Native Name:</span> ${data.nativeName}</p>
+                            <p><span>Population:</span> ${+data.population / 1000000}</p>
+                            <p><span>Region:</span> ${data.region}</p>
+                            <p><span>Subregion:</span> ${data.subregion}</p
+                            <p><span>Capital:</span> ${data.capital}</p>
                         </div>
                         <div>
-                            <p><span>Top Level Domain:</span> .be</p>
-                            <p><span>Currencies:</span> Euro</p>
-                            <p><span>Languages:</span> Dutch, French, German</p>
+                            <p><span>Top Level Domain:</span> ${data.topLevelDomain[0]}</p>
+                            <p><span>Currencies:</span> ${data.currencies[0].name}</p>
+                            <p class="languages"><span>Languages:</span> ${getLanguages(data.languages)}</p>
                         </div>
                     </div>
                     <div class="border-countries">
@@ -139,3 +136,15 @@ countriesContainer.addEventListener("click", function(e){
             })();
     }
 })
+
+
+// Languages?
+
+function getLanguages(arr) {
+    const languages = []
+    arr.forEach(lang => {
+        languages.push(lang.name)
+    })
+
+    return [...languages]
+}

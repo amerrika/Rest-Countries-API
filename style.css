@@ -70,7 +70,7 @@ header {
 /* Main */
 
 main {
-    margin-bottom: 5rem;
+    padding-bottom: 2rem;
 }
 .section-search {
     margin-top: 5rem;
@@ -159,11 +159,13 @@ input {
 /* Country Details Page*/
 
 .country-details {
-    height: 85vh;
+    height: 83vh;
 
     display: grid;
     place-content: center;
     grid-template-columns: repeat(2, 1fr);
+
+    position: relative;
 }
 .country-details__img img {
     max-height: 35rem;
@@ -191,6 +193,21 @@ input {
 .border-countries {
     margin-top: 3rem;
 }
+
+.btn-back {
+    position: absolute;
+    top: 6rem;
+
+    cursor: pointer;
+    padding: 1rem 3rem;
+    font-weight: var(--fw-medium);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.1);
+    background-color: var(--clr-white);
+    color: var(--clr-grey-500);
+}
+
 /* Country (Card) */
 
 .country {
@@ -200,6 +217,7 @@ input {
     border-radius: var(--border-radius);
 }
 .country-img {
+    cursor: pointer;
     height: 17rem;
     object-fit: cover;
     border-top-left-radius: var(--border-radius);
