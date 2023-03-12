@@ -70,10 +70,10 @@ header {
 /* Main */
 
 main {
-    margin-top: 5rem;
     margin-bottom: 5rem;
 }
 .section-search {
+    margin-top: 5rem;
     display: flex;
     justify-content: space-between;
 }
@@ -156,6 +156,41 @@ input {
     gap: 2rem;
 }
 
+/* Country Details Page*/
+
+.country-details {
+    height: 85vh;
+
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+.country-details__img img {
+    max-height: 35rem;
+}
+.country-details__content {
+    padding: 0 3rem;
+    align-self: center;
+}
+.country-details__data {
+    display: flex;
+    justify-content: space-between;
+}
+.country-details__data span,
+.border-countries span {
+    font-weight: var(--fw-medium);
+}
+.country-details__data p {
+    margin-bottom: 1rem;
+}
+.country-title {
+    font-size: 2.7rem;
+    font-weight: var(--fw-bold);
+    margin-bottom: 3rem;
+}
+.border-countries {
+    margin-top: 3rem;
+}
 /* Country (Card) */
 
 .country {
