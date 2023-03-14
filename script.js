@@ -93,6 +93,7 @@ regions.forEach(region => {
 // Country Details Page Features 
 
 const renderCountryDetails = function(data){
+    console.log(data.languages)
     const html = `
         <div class="country-details__img">
             <img id="country-details-img" src="${data.flag}" alt="">
@@ -102,7 +103,7 @@ const renderCountryDetails = function(data){
             <div class="country-details__data">
                 <div>
                     <p><span>Native Name:</span> ${data.nativeName}</p>
-                    <p><span>Population:</span> ${+data.population / 1000000}</p>
+                    <p><span>Population:</span> ${(+data.population / 1000000).toFixed(1)} millions</p>
                     <p><span>Region:</span> ${data.region}</p>
                     <p><span>Subregion:</span> ${data.subregion}</p
                     <p><span>Capital:</span> ${data.capital}</p>
@@ -110,22 +111,29 @@ const renderCountryDetails = function(data){
                 <div>
                     <p><span>Top Level Domain:</span> ${data.topLevelDomain[0]}</p>
                     <p><span>Currencies:</span> ${data.currencies[0].name}</p>
-                    <p class="languages"><span>Languages:</span> ${getLanguages(data.languages)}</p>
+                    <p><span>Languages: </span> 
+                        ${data.languages.map(langObj => {
+                            return `${langObj.name}`
+                        })}
+                    </p>
                 </div>
             </div>
             <div class="border-countries">
                 <ul class="border-countries__list">
-                    ${data.borders.map(borderCountry => {
-                        console.log(borderCountry)
+                    ${data.borders.map(code => {
+                        
                         return `
-                            <li class="border-country">${borderCountry.name}</li>
+                        <li class="border-country">${
+                            fetch(`https://restcountries.com/v2/alpha/${code}`)
+                            .then(res => res.json())
+                            .then(data => data.name)}</li>
                         `
                     })}
                 </ul>  
             </div>
         </div>       
     `
-    document.querySelector(".country-details").insertAdjacentHTML("beforeend", html);
+    document.querySelector(".country-details").insertAdjacentHTML("afterbegin", html);
 }
 
 const getDataCode = async function(code){
@@ -151,14 +159,3 @@ countriesContainer.addEventListener("click", function(e){
     }
 })
 
-
-// Languages?
-
-function getLanguages(arr) {
-    const languages = []
-    arr.forEach(lang => {
-        languages.push(lang.name)
-    })
-
-    return [...languages]
-}
